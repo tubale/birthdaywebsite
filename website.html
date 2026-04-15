@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --rose:    #c2708a;
+    --rose-lt: #f5dde6;
+    --rose-dk: #8a4a63;
+    --gold:    #c9a96e;
+    --gold-lt: #f5ead8;
+    --cream:   #fdf7f0;
+    --warm:    #f7ede3;
+    --text:    #3a2a2f;
+    --muted:   #8a7070;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(160deg, #fdf0f4 0%, #fdf7f0 50%, #f7f0e8 100%);
+    overflow: hidden;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  /* decorative petals / circles */
+  .petal {
+    position: absolute;
+    border-radius: 50% 10% 50% 10%;
+    opacity: 0.18;
+    animation: drift linear infinite;
+    pointer-events: none;
+  }
+  @keyframes drift {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+    10%  { opacity: 0.18; }
+    90%  { opacity: 0.18; }
+    100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--rose);
+    letter-spacing: 0.08em;
+    margin-bottom: 1.2rem;
+    animation: fadeUp 1.2s ease both;
+    animation-delay: 0.2s;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 7.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: var(--rose-dk);
+    letter-spacing: -0.01em;
+    animation: fadeUp 1.2s ease both;
+    animation-delay: 0.45s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero-sub {
+    margin-top: 1.8rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    animation: fadeUp 1.2s ease both;
+    animation-delay: 0.7s;
+  }
+
+  .hero-divider {
+    margin: 2.5rem auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.9s;
+  }
+  .hero-divider::before,
+  .hero-divider::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+  .hero-divider span {
+    color: var(--gold);
+    font-size: 1.4rem;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: fadeUp 1s ease both, bob 2s ease-in-out 2s infinite;
+    animation-delay: 1.4s, 2s;
+    color: var(--muted);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .scroll-hint svg { width: 20px; height: 20px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+  @keyframes bob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── TIMELINE SECTION ── */
+  .timeline-section {
+    background: var(--warm);
+    padding: 6rem 1.5rem 8rem;
+    position: relative;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    color: var(--rose-dk);
+  }
+  .section-header p {
+    margin-top: 0.8rem;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--muted);
+  }
+
+  /* central line */
+  .timeline {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold) 8%, var(--gold) 92%, transparent);
+    transform: translateX(-50%);
+  }
+
+  /* each entry */
+  .tl-item {
+    display: flex;
+    width: 100%;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .tl-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* left side = date, right side = content, alternating */
+  .tl-item:nth-child(odd) {
+    flex-direction: row;
+  }
+  .tl-item:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .tl-date-side, .tl-content-side {
+    width: calc(50% - 2rem);
+  }
+  .tl-date-side {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2.5rem;
+  }
+  .tl-item:nth-child(even) .tl-date-side {
+    justify-content: flex-start;
+    padding-right: 0;
+    padding-left: 2.5rem;
+  }
+
+  .tl-date {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--gold);
+    text-align: right;
+    line-height: 1.4;
+  }
+  .tl-item:nth-child(even) .tl-date {
+    text-align: left;
+  }
+  .tl-date strong {
+    display: block;
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 500;
+    color: var(--rose-dk);
+  }
+
+  /* dot on the line */
+  .tl-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    background: var(--cream);
+    margin-top: 0.4rem;
+    z-index: 1;
+    transition: background 0.4s;
+  }
+  .tl-item.visible .tl-dot { background: var(--rose-lt); }
+
+  .tl-content-side {
+    padding-left: 2.5rem;
+    padding-right: 0;
+  }
+  .tl-item:nth-child(even) .tl-content-side {
+    padding-left: 0;
+    padding-right: 2.5rem;
+    text-align: right;
+  }
+
+  .tl-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.1rem 1.4rem;
+    border: 1px solid #eedde4;
+    position: relative;
+  }
+  .tl-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--rose-dk);
+    margin-bottom: 0.3rem;
+  }
+  .tl-card p {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .tl-card .tl-emoji {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+
+  /* last item: special star */
+  .tl-item.special .tl-dot {
+    width: 20px;
+    height: 20px;
+    border-color: var(--rose);
+    background: var(--rose-lt);
+    box-shadow: 0 0 0 5px #f5dde650;
+  }
+  .tl-item.special .tl-card {
+    border-color: var(--rose);
+    background: linear-gradient(135deg, #fff9fb, white);
+  }
+  .tl-item.special .tl-card h3 {
+    font-size: 1.25rem;
+    color: var(--rose);
+  }
+
+  /* edit hint */
+  .edit-note {
+    text-align: center;
+    margin-top: 4rem;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--rose-dk);
+    color: #f5dde6;
+    text-align: center;
+    padding: 3rem 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 580px) {
+    .timeline::before { left: 20px; }
+    .tl-item,
+    .tl-item:nth-child(even) { flex-direction: column; padding-left: 3rem; }
+    .tl-date-side,
+    .tl-item:nth-child(even) .tl-date-side { width: 100%; justify-content: flex-start; padding: 0; margin-bottom: 0.5rem; }
+    .tl-content-side,
+    .tl-item:nth-child(even) .tl-content-side { width: 100%; padding: 0; text-align: left; }
+    .tl-date, .tl-item:nth-child(even) .tl-date { text-align: left; }
+    .tl-dot { left: 20px; }
+    .tl-item:nth-child(even) .tl-content-side { padding-right: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- floating petals -->
+<div class="hero">
+  <script>
+    (function() {
+      const colors = ['#f5c0d0','#e8a8bc','#f2d5c0','#e8c8b0','#f0dce0'];
+      const sizes  = [14,18,22,28,12,16];
+      const n = 18;
+      for (let i = 0; i < n; i++) {
+        const p = document.createElement('div');
+        p.className = 'petal';
+        const s = sizes[i % sizes.length];
+        p.style.cssText = `
+          width:${s}px; height:${s*.7}px;
+          background:${colors[i%colors.length]};
+          left:${Math.random()*100}%;
+          animation-duration:${12+Math.random()*16}s;
+          animation-delay:${-Math.random()*20}s;
+          border-radius: ${40+Math.random()*20}% ${10+Math.random()*10}% ${40+Math.random()*20}% ${10+Math.random()*10}%;
+        `;
+        document.currentScript.parentElement.appendChild(p);
+      }
+    })();
+  </script>
+
+  <p class="hero-eyebrow">today is your day</p>
+
+  <h1 class="hero-title">Happy<br><em>Birthday Riddhi!</em></h1>
+
+  <p class="hero-sub">I love you so much baby</p>
+
+  <div class="hero-divider"><span>✦</span></div>
+
+  <div class="scroll-hint">
+    <span>scroll down</span>
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</div>
+
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-header">
+    <h2>A life beautifully lived</h2>
+    <p>from the very first moment to today</p>
+  </div>
+
+  <div class="timeline" id="timeline">
+
+    <div class="tl-item">
+      <div class="tl-date-side">
+        <div class="tl-date"><strong>April 16</strong>2007</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-content-side">
+        <div class="tl-card">
+          <span class="tl-emoji">🫃</span>
+          <h3>Birth</h3>
+          <p>type shit. sum nonchalant super cool person was born</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date-side">
+        <div class="tl-date"><strong>April 17, 2007</strong>April 20, 2005</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-content-side">
+        <div class="tl-card">
+          <span class="tl-emoji">😴</span>
+          <h3>boring</h3>
+          <p>boring ass life</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date-side">
+        <div class="tl-date"><strong>April 21</strong>2025</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-content-side">
+        <div class="tl-card">
+          <span class="tl-emoji">⭐</span>
+          <h3>LGTP?</h3>
+          <p>haha rem this? i asked you to prom this day</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date-side">
+        <div class="tl-date"><strong>May 6</strong>2025</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-content-side">
+        <div class="tl-card">
+          <span class="tl-emoji">📅</span>
+          <h3>Our first official date</h3>
+          <p>marugame, sheep, snake, sid, tryna put sid on.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date-side">
+        <div class="tl-date"><strong>June 1</strong>2025</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-content-side">
+        <div class="tl-card">
+          <span class="tl-emoji">💍</span>
+          <h3>Best Day of our lives</h3>
+          <p>i asked u to be gf. on sum nonchalant shit. u saw ur baby for the first time</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date-side">
+        <div class="tl-date"><strong>June 25</strong>2025</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-content-side">
+        <div class="tl-card">
+          <span class="tl-emoji">🏖️</span>
+          <h3>half moon bay</h3>
+          <p>do you rem our cute pics that we post all the time</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-date-side">
+        <div class="tl-date"><strong>March 14</strong>2026</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-content-side">
+        <div class="tl-card">
+          <span class="tl-emoji">💃</span>
+          <h3>Silsilay</h3>
+          <p>congrats. you worked so hard for this and everything paid off</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item special">
+      <div class="tl-date-side">
+        <div class="tl-date"><strong>April 16</strong>2026</div>
+      </div>
+      <div class="tl-dot"></div>
+      <div class="tl-content-side">
+        <div class="tl-card">
+          <span class="tl-emoji">🎂</span>
+          <h3>Today — your 19th birthday</h3>
+          <p>Happy Birthday Riddhi! I love you so much.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+<script>
+  const items = document.querySelectorAll('.tl-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
